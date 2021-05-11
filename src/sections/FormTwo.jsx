@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 
@@ -25,12 +23,12 @@ const FormTwo = (props) => {
     if (!formDetail.jobTitle) {
       setSnackbar({ ...snackbar, open: true, message: "Please Enter Job Title", warning: "info" });
       setTimeout(() => {
-        setSnackbar({ ...snackbar, open: false, message: "", warning: "" });
+        setSnackbar({ ...snackbar, open: false, message: "", warning: "info" });
       }, 2000);
     } else if (!formDetail.jobLocation) {
       setSnackbar({ ...snackbar, open: true, message: "Please Enter Job Location", warning: "info" });
       setTimeout(() => {
-        setSnackbar({ ...snackbar, open: false, message: "", warning: "" });
+        setSnackbar({ ...snackbar, open: false, message: "", warning: "info" });
       }, 2000);
     } else {
       history.push("/intern-details");
@@ -80,7 +78,6 @@ const FormTwo = (props) => {
         autoHideDuration={2000}
         anchorOrigin={{ vertical: snackbar.vertical, horizontal: snackbar.horizontal }}
         open={snackbar.open}
-        // onClose={handleClose}
         key={snackbar.vertical + snackbar.horizontal}
       >
         <Alert severity={snackbar.warning}>{snackbar.message}</Alert>
