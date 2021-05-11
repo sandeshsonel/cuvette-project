@@ -21,7 +21,7 @@ const StipendSlider = withStyles({
   },
   active: {},
   valueLabel: {
-    left: "calc(-50% + 12px)",
+    left: "calc(-50% + 4px)",
     top: -22,
     "& *": {
       background: "transparent",

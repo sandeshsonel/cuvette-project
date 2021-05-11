@@ -4,9 +4,7 @@ import FormTwo from "../../sections/FormTwo";
 const HomePage = () => {
   return (
     <div>
-      <div>
-        <FormTwo />
-      </div>
+      <FormTwo />
     </div>
   );
 };
