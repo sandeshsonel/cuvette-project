@@ -102,7 +102,7 @@ const FormOne = ({ min = 5000, max = 1000000 }) => {
                 Mode
               </label>
               <div className="mt-1 xl:mt-2 xl:flex xl:items-center xl:space-x-3 grid grid-cols-2 gap-3">
-                <a
+                <span
                   onClick={() => setCheck("part-time")}
                   className={`flex items-start hover:border-blue-400 space-x-3 cursor-pointer  border-2 border-transparent px-2 py-2 xl:px-3 xl:py-3 rounded-md bg-gray-100 ${
                     check === "part-time" ? "border-2 bg-blue-50 border-blue-400" : ""
@@ -120,8 +120,8 @@ const FormOne = ({ min = 5000, max = 1000000 }) => {
                     <h1>Part-time</h1>
                     <p className="text-sm">20 hrs/week</p>
                   </div>
-                </a>
-                <a
+                </span>
+                <span
                   onClick={() => setCheck("semi-full-time")}
                   className={`flex items-start hover:border-blue-400  space-x-3 cursor-pointer  border-2 border-transparent px-3 py-3 rounded-md bg-gray-100 ${
                     check === "semi-full-time" ? "border-2 bg-blue-50 border-blue-400" : ""
@@ -138,8 +138,8 @@ const FormOne = ({ min = 5000, max = 1000000 }) => {
                     <h1>Semi Full-time</h1>
                     <p className="text-sm">30 hrs/week</p>
                   </div>
-                </a>
-                <a
+                </span>
+                <span
                   onClick={() => setCheck("full-time")}
                   className={`flex items-start hover:border-blue-400  space-x-3 cursor-pointer  border-2 border-transparent px-3 py-3 rounded-md bg-gray-100 ${
                     check === "full-time" ? "border-2 bg-blue-50 border-blue-400" : ""
@@ -156,7 +156,7 @@ const FormOne = ({ min = 5000, max = 1000000 }) => {
                     <h1>Full-time</h1>
                     <p className="text-sm">40 hrs/week</p>
                   </div>
-                </a>
+                </span>
               </div>
             </div>
             <div className="pb-11">

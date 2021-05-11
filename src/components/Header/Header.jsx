@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -10,7 +11,7 @@ const Header = () => {
     <div className="border-b sticky top-0 w-full z-10 bg-white px-4">
       <div className="flex items-center justify-between py-3 xl:py-4 max-w-7xl m-auto">
         <Link to="/">
-          <a href="#">
+          <a>
             <img className="w-24" src={logo} alt="" />
           </a>
         </Link>
@@ -19,21 +20,19 @@ const Header = () => {
           <ul className="xl:flex lg:flex md:flex sm:flex items-center space-x-6 hidden">
             <li>
               <Link to="/my-listings">
-                <a className="text-base" href="#">
-                  My Listings
-                </a>
+                <a className="text-base">My Listings</a>
               </Link>
             </li>
             <li>
               <Link to="/notification">
-                <a href="#">
+                <a>
                   <img className="w-8" src={notification} alt="" />
                 </a>
               </Link>
             </li>
             <li>
               <Link to="/profile">
-                <a href="#">
+                <a>
                   <img className="w-8" src={user} alt="" />
                 </a>
               </Link>
