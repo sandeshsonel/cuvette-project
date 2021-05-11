@@ -1,14 +1,45 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import "./formone.style.css";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
+import Slider from "@material-ui/core/Slider";
+
+const StipendSlider = withStyles({
+  root: {
+    color: "rgb(59, 130, 246)",
+    height: 8,
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#fff",
+    border: "2px solid rgb(59, 130, 246)",
+    marginTop: -8,
+    marginLeft: -12,
+    "&:focus, &:hover, &$active": {
+      boxShadow: "inherit",
+    },
+  },
+  active: {},
+  valueLabel: {
+    left: "calc(-50% + 12px)",
+    top: -22,
+    "& *": {
+      background: "transparent",
+      color: "#000",
+    },
+  },
+  track: {
+    height: 8,
+    borderRadius: 4,
+  },
+  rail: {
+    height: 6,
+    borderRadius: 4,
+  },
+})(Slider);
 
 const FormOne = ({ min = 5000, max = 1000000 }) => {
   const [check, setCheck] = useState("part-time");
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
-  const minValRef = useRef(min);
-  const maxValRef = useRef(max);
-  const range = useRef(null);
 
   const generateMonthOptions = () => {
     let array = [];
@@ -39,29 +70,6 @@ const FormOne = ({ min = 5000, max = 1000000 }) => {
 
     return arr;
   };
-
-  const getPercent = useCallback((value) => Math.round(((value - min) / (max - min)) * 100), [min, max]);
-
-  // Set width of the range to decrease from the left side
-  useEffect(() => {
-    const minPercent = getPercent(minVal);
-    const maxPercent = getPercent(maxValRef.current);
-
-    if (range.current) {
-      range.current.style.left = `${minPercent}%`;
-      range.current.style.width = `${maxPercent - minPercent}%`;
-    }
-  }, [minVal, getPercent]);
-
-  // Set width of the range to decrease from the right side
-  useEffect(() => {
-    const minPercent = getPercent(minValRef.current);
-    const maxPercent = getPercent(maxVal);
-
-    if (range.current) {
-      range.current.style.width = `${maxPercent - minPercent}%`;
-    }
-  }, [maxVal, getPercent]);
 
   return (
     <div className="py-2 px-4 xl:py-8 xl:px-6 pt-2 pb-6">
@@ -159,44 +167,26 @@ const FormOne = ({ min = 5000, max = 1000000 }) => {
                 </span>
               </div>
             </div>
-            <div className="pb-11">
+
+            <div>
               <label className="font-semiBold text-sm xl:text-base lg:text-base md:text-base" htmlFor="">
                 Stipend Range
               </label>
-
-              <div className="xl:mt-4 w-full">
-                <input
-                  type="range"
-                  min={min}
-                  max={max}
-                  value={minVal}
-                  onChange={(event) => {
-                    const value = Math.min(Number(event.target.value), maxVal - 1);
-                    setMinVal(value);
-                    minValRef.current = value;
-                  }}
-                  className="thumb thumb--left"
-                  style={{ zIndex: minVal > max - 100 && "5" }}
+              <div className="mt-6">
+                <StipendSlider
+                  aria-label="pretto slider"
+                  getAriaLabel={(index) => (index === 0 ? "Minimum price" : "Maximum price")}
+                  defaultValue={[20000, 40000]}
+                  onChange={(e, val) => console.log("xoxo", val)}
+                  min={5000}
+                  max={100000}
+                  step={100}
+                  valueLabelDisplay="on"
                 />
-                <input
-                  type="range"
-                  min={min}
-                  max={max}
-                  value={maxVal}
-                  onChange={(event) => {
-                    const value = Math.max(Number(event.target.value), minVal + 1);
-                    setMaxVal(value);
-                    maxValRef.current = value;
-                  }}
-                  className="thumb thumb--right"
-                />
-
-                <div className="relative w-full flex items-center justify-between">
-                  <div className="slider__track" />
-                  <div ref={range} className="slider__range" />
-                  <div className="slider__left-value">Inr 5,000 {min}</div>
-                  <div className="slider__right-value">Inr 1,00,000 {max}</div>
-                </div>
+              </div>
+              <div className="flex items-center justify-between text-sm text-gray-500 uppercase">
+                <div className="">Inr 5,000 </div>
+                <div className="">Inr 1,00,000</div>
               </div>
             </div>
 
@@ -263,7 +253,6 @@ const FormOne = ({ min = 5000, max = 1000000 }) => {
               <textarea
                 className="mt-2 xl:mt-3 text-sm xl:text-base lg:text-base md:text-base py-3 px-3 cursor-pointer w-full border rounded-md focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-400 focus:outline-none transition-colors duration-200"
                 placeholder={"Enter the job description\nTry to be as precise as possible (250-300 words)\n\n1.\n2.\n3."}
-                // placeholder="Enter the job description&#13;&#10;Try to be as precise as possible (250-300 words)&#10;1.&#13;&#10;2.&#13;&#10;3."
                 name=""
                 id=""
                 cols="30"
