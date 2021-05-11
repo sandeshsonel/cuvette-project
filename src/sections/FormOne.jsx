@@ -238,7 +238,7 @@ const FormOne = ({ min = 5000, max = 1000000 }) => {
                 <div className="flex items-center space-x-3">
                   <input
                     className="w-20 px-3 mt-2 text-sm xl:text-base lg:text-base md:text-base bg-white placeholder-gray-400 inline-block cursor-pointer py-2 border rounded-md outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-400 focus:outline-none transition-colors duration-200"
-                    type="text"
+                    type="number"
                     placeholder=""
                   />
                   <p className="text-gray-400 text-sm xl:text-base">Months</p>
