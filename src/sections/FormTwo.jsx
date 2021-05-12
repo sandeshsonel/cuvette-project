@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 
-import history from "../history";
-
-import { updateUserDetails } from "../app/actions/user.action";
-
 const FormTwo = (props) => {
-  const { updateUserDetails, setValue, internJobInfo, setInternJobInfo } = props;
+  const { setValue, internJobInfo, setInternJobInfo } = props;
   const [check, setCheck] = React.useState(false);
 
-  const [snackbar, setSnackbar] = React.useState({
+  const [snackbar, setSnackbar] = useState({
     open: false,
     vertical: "top",
     horizontal: "center",
@@ -33,7 +28,6 @@ const FormTwo = (props) => {
       }, 2000);
     } else {
       setValue(2);
-      // history.push("/intern-details");
     }
   };
   return (
@@ -88,8 +82,4 @@ const FormTwo = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  updateUserDetails: (data) => dispatch(updateUserDetails(data)),
-});
-
-export default connect(null, mapDispatchToProps)(FormTwo);
+export default FormTwo;

@@ -1,4 +1,4 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Switch, Route, Redirect, useLocation, BrowserRouter as Router } from "react-router-dom";
 
@@ -49,7 +49,7 @@ class Routes extends Component {
   }
 
   checkAutoLogin = () => {
-    const { token, expireDate, setLogin, getUserDetails, fetchCompanyDetails } = this.props;
+    const { token, expireDate, setLogin } = this.props;
     if (token && new Date(expireDate) > new Date()) {
       setLogin(true);
     } else {

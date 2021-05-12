@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { signUpUser } from "../../app/actions/auth.action";
 import CircularLoader from "../../components/CircularProgressBar/CircularLoader";
 const SignUpPage = (props) => {
-  const { signUpUser, isLoading, isLogin } = props;
+  const { signUpUser, isLoading } = props;
   const [signUpDetails, setSignUpDetails] = useState({
     firstName: "",
     lastName: "",
@@ -148,7 +148,6 @@ const SignUpPage = (props) => {
 
 const mapStateToProps = (state) => ({
   isLoading: state.auth.isLoading,
-  isLogin: state.auth.isLogin,
 });
 const mapDispatchToProps = (dispatch) => ({
   signUpUser: (data) => dispatch(signUpUser(data)),

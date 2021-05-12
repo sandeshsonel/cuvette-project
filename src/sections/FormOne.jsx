@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -44,7 +43,7 @@ const StipendSlider = withStyles({
 })(Slider);
 
 const FormOne = (props) => {
-  const { updateUserDetails, setValue, setUpdateUserJobDetails, jobDetails, internJobInfo, setInternJobInfo } = props;
+  const { setValue, setUpdateUserJobDetails, internJobInfo, setInternJobInfo } = props;
   const [check, setCheck] = useState("");
 
   const [snackbar, setSnackbar] = React.useState({
