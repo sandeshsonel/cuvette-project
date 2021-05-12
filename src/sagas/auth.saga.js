@@ -17,10 +17,10 @@ const signInUserRequest = async (data) => {
     .catch((err) => err);
 };
 
-function* signInUserFun(payload) {
-  console.log("payload", payload);
+function* signInUserFun(data) {
+  console.log("msg", data.payload);
   try {
-    const signInData = yield call(signInUserRequest, payload);
+    const signInData = yield call(signInUserRequest, data.payload);
     console.log("signIn", signInData.errorCode);
     if (Number(signInData.status) === 1) {
       var expireDate = new Date();
@@ -32,9 +32,9 @@ function* signInUserFun(payload) {
         expireDate,
       };
       localStorage.setItem("userData", JSON.stringify(saveUserData));
+      yield put(setUserProfileData(signInData.data));
       yield put(signInUserSuccess(saveUserData));
       yield put(setLogin(true));
-      yield put(setUserProfileData(signInData.data));
     } else if (Number(signInData.status) === 0) {
       yield put(setNotification(signInData.message));
       yield put(signInUserFailed());

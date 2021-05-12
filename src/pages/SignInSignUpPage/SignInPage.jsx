@@ -6,9 +6,10 @@ import Alert from "@material-ui/lab/Alert";
 
 import { setSignInUserDetails } from "../../app/actions";
 
-const SignInPage = () => {
+const SignInPage = (props) => {
+  const { setSignInUserDetails } = props;
   const [signInDetails, setSignInDetails] = React.useState({
-    username: "",
+    email: "",
     password: "",
   });
   const [snackbar, setSnackbar] = React.useState({
@@ -21,7 +22,7 @@ const SignInPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!signInDetails.username) {
+    if (!signInDetails.email) {
       setSnackbar({ ...snackbar, open: true, message: "Enter your username", warning: "error" });
       setTimeout(() => {
         setSnackbar({ ...snackbar, open: false, message: "", warning: "info" });
@@ -44,15 +45,15 @@ const SignInPage = () => {
         <div className="space-y-4 mt-6">
           <div className="w-full">
             <label className="font-medium" htmlFor="">
-              Username
+              Email
             </label>
             <input
-              value={signInDetails.username}
-              onChange={(e) => setSignInDetails({ ...signInDetails, username: e.target.value })}
+              value={signInDetails.email}
+              onChange={(e) => setSignInDetails({ ...signInDetails, email: e.target.value })}
               className="mt-2 cursor-pointer w-full outline-none rounded border py-2 px-3 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-400 focus:outline-none transition-colors duration-200"
               placeholder=""
-              type="text"
-              // required
+              type="email"
+              required
             />
           </div>
           <div className="w-full">
@@ -65,7 +66,7 @@ const SignInPage = () => {
               className="mt-2 cursor-pointer w-full outline-none rounded border py-2 px-3 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-400 focus:outline-none transition-colors duration-200"
               placeholder=""
               type="password"
-              // required
+              required
             />
           </div>
         </div>

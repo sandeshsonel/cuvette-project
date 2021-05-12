@@ -16,14 +16,10 @@ export const signUpUser = (data) => ({
 });
 
 // signin
-export const setSignInUserDetails = (signInDetails) => {
-  console.log("xoxo-action", signInDetails);
-
-  return {
-    type: AuthActionTypes.SET_SIGN_IN_USER_DETAILS,
-    payload: signInDetails,
-  };
-};
+export const setSignInUserDetails = (signInDetails) => ({
+  type: AuthActionTypes.SET_SIGN_IN_USER_DETAILS,
+  payload: signInDetails,
+});
 export const signInUserSuccess = (data) => ({
   type: AuthActionTypes.SIGN_IN_USER_SUCCESS,
   payload: data,

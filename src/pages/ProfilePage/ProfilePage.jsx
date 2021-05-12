@@ -15,7 +15,7 @@ const ProfilePage = (props) => {
 
   console.log("xoxo-prop", userProfile);
   return (
-    <div>
+    <div className="px-4 sm:px-4 lg:px-4 md:px-4 xl:px-0 pb-8">
       <div className="max-w-3xl m-auto">
         <div className="mt-6 flex items-center justify-between">
           <div>
