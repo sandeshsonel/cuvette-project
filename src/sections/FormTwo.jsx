@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 
 import history from "../history";
 
+import { updateUserDetails } from "../app/actions/user.action";
+
 const FormTwo = (props) => {
+  const { updateUserDetails, setValue, internJobInfo, setInternJobInfo } = props;
   const [check, setCheck] = React.useState(false);
-  const [formDetail, setFormDetail] = useState({
-    jobTitle: "",
-    jobLocation: "",
-  });
+
   const [snackbar, setSnackbar] = React.useState({
     open: false,
     vertical: "top",
@@ -20,18 +21,19 @@ const FormTwo = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formDetail.jobTitle) {
+    if (!internJobInfo.jobTitle) {
       setSnackbar({ ...snackbar, open: true, message: "Please Enter Job Title", warning: "info" });
       setTimeout(() => {
         setSnackbar({ ...snackbar, open: false, message: "", warning: "info" });
       }, 2000);
-    } else if (!formDetail.jobLocation) {
+    } else if (!internJobInfo.jobLocation) {
       setSnackbar({ ...snackbar, open: true, message: "Please Enter Job Location", warning: "info" });
       setTimeout(() => {
         setSnackbar({ ...snackbar, open: false, message: "", warning: "info" });
       }, 2000);
     } else {
-      history.push("/intern-details");
+      setValue(2);
+      // history.push("/intern-details");
     }
   };
   return (
@@ -43,8 +45,8 @@ const FormTwo = (props) => {
               Job Title
             </label>
             <input
-              value={formDetail.jobTitle}
-              onChange={(e) => setFormDetail({ ...formDetail, jobTitle: e.target.value })}
+              value={internJobInfo.jobTitle}
+              onChange={(e) => setInternJobInfo({ ...internJobInfo, jobTitle: e.target.value })}
               className="mt-1 xl:mt-2 cursor-pointer w-full outline-none rounded border py-2 px-3 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-400 focus:outline-none transition-colors duration-200"
               type="text"
               placeholder="e.g. Full stack developer"
@@ -55,8 +57,8 @@ const FormTwo = (props) => {
               Job Location
             </label>
             <input
-              value={formDetail.jobLocation}
-              onChange={(e) => setFormDetail({ ...formDetail, jobLocation: e.target.value })}
+              value={internJobInfo.jobLocation}
+              onChange={(e) => setInternJobInfo({ ...internJobInfo, jobLocation: e.target.value })}
               className="mt-1 xl:mt-2 cursor-pointer w-full outline-none rounded border py-2 px-3 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-400 focus:outline-none transition-colors duration-200"
               type="text"
               placeholder="Enter the location"
@@ -86,4 +88,8 @@ const FormTwo = (props) => {
   );
 };
 
-export default FormTwo;
+const mapDispatchToProps = (dispatch) => ({
+  updateUserDetails: (data) => dispatch(updateUserDetails(data)),
+});
+
+export default connect(null, mapDispatchToProps)(FormTwo);

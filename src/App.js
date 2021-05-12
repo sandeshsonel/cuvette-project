@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
@@ -8,25 +9,22 @@ import FormOne from "./sections/FormOne";
 import MyListings from "./sections/MyListings";
 
 import history from "./history";
-
-function App() {
-  return (
-    <div className="font-inter">
+import SignUpPage from "./pages/SignInSignUpPage/SignUpPage";
+import SignInPage from "./pages/SignInSignUpPage/SignInPage";
+import InternInfo from "./pages/InternInfo/InternInfo";
+import Routes from "./Routes";
+class App extends Component {
+  render() {
+    return (
       <div>
-        <Router history={history}>
-          <Header />
-          <Switch>
-            <Route path="/my-listings" component={MyListings} />
-            <Route path="/intern-details" component={FormOne} />
-            <Route path="/notification" component={NotificationPage} />
-            <Route path="/profile" component={ProfilePage} />
-
-            <Route exact path="/" component={HomePage} />
-          </Switch>
-        </Router>
+        <Routes />
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  isLogin: state.auth.isLogin,
+});
+
+export default connect(mapStateToProps)(App);
