@@ -9,8 +9,8 @@ const HomePage = ({ userDetails }) => {
         {userDetails && userDetails.jobDetails.length === 0 ? (
           <InternInfo />
         ) : (
-          <div className="text-3xl font-medium" style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-            Welcom to Cuvette
+          <div className="text-2xl font-medium" style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+            Welcome to Cuvette
           </div>
         )}
       </div>
