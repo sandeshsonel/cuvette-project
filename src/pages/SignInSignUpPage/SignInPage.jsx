@@ -5,9 +5,10 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 
 import { setSignInUserDetails } from "../../app/actions";
+import CircularLoader from "../../components/CircularProgressBar/CircularLoader";
 
 const SignInPage = (props) => {
-  const { setSignInUserDetails } = props;
+  const { setSignInUserDetails, isLoading } = props;
   const [signInDetails, setSignInDetails] = React.useState({
     email: "",
     password: "",
@@ -40,6 +41,7 @@ const SignInPage = (props) => {
   console.log("popo", signInDetails);
   return (
     <div className="px-4 py-8 max-w-3xl m-auto xl:absolute xl:inset-0 xl:flex xl:items-center xl:justify-center">
+      {isLoading && <CircularLoader />}
       <form onSubmit={handleSubmit} action="">
         <span className="text-2xl font-semiBold">Login to Cuvette</span>
         <div className="space-y-4 mt-6">
@@ -97,8 +99,12 @@ const SignInPage = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  isLoading: state.auth.isLoading,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setSignInUserDetails: (signInDetails) => dispatch(setSignInUserDetails(signInDetails)),
 });
 
-export default connect(null, mapDispatchToProps)(SignInPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);

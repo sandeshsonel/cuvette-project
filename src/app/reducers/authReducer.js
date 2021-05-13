@@ -29,6 +29,12 @@ const authReducer = (state = initial_state, action) => {
       return {
         ...state,
         ...action.payload,
+        isLoading: false,
+      };
+    case AuthActionTypes.SIGN_UP_USER:
+      return {
+        ...state,
+        isLoading: true,
       };
     case AuthActionTypes.SET_SIGN_IN_USER_DETAILS:
       return {
@@ -39,6 +45,7 @@ const authReducer = (state = initial_state, action) => {
       return {
         ...state,
         ...action.payload,
+        isLogin: true,
         isLoading: false,
       };
     case AuthActionTypes.SIGN_IN_USER_FAILED:
