@@ -1,6 +1,6 @@
 import JobsActionTypes from "../app/types/jobs.types";
 const { all, call, fork, put, takeEvery } = require("redux-saga/effects");
-const { addNewJobApi, deleteJobApi, getJobListApi } = require("../utils/apiFetch");
+const { addNewJobApi, getJobListApi } = require("../utils/apiFetch");
 const { addNewJobSuccess, addNewJobFailed, getJobListSuccess, getJobListFailed } = require("../app/actions");
 
 const getJobListRequest = async () => {
@@ -13,12 +13,6 @@ const getJobListRequest = async () => {
 
 const addNewJobRequest = async (data) => {
   return await addNewJobApi(data)
-    .then((res) => res)
-    .catch((err) => err);
-};
-
-const deleteJobRequest = async (data) => {
-  return await deleteJobApi(data)
     .then((res) => res)
     .catch((err) => err);
 };

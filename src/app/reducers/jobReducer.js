@@ -47,6 +47,12 @@ const myListingReducer = (state = initialState, action) => {
         apiResponse: 2,
         errorMsg: action.payload,
       };
+    case JobActionTypes.UPDATE_API_RESPONSE:
+      return {
+        ...state,
+        apiResponse: action.payload,
+      };
+
     default:
       return state;
   }

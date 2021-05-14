@@ -21,7 +21,10 @@ const MyListings = (props) => {
   const [isUpdateJobDetail, setIsUpdateJobDetail] = useState(false);
 
   useEffect(() => {
-    getJobList();
+    if (myJobs.length === 0) {
+      getJobList();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleOpenJobDetailDialog = (jobList) => {
@@ -32,10 +35,10 @@ const MyListings = (props) => {
     setOpen(false);
   };
 
-  const handleOpenDeleteJobDialog = (jobId) => {
-    setDeleteDialog(true);
-    // setSelectJobList(jobId);
-  };
+  // const handleOpenDeleteJobDialog = (jobId) => {
+  //   setDeleteDialog(true);
+  //   // setSelectJobList(jobId);
+  // };
   const handleCloseDeleteJobDialog = () => {
     setDeleteDialog(false);
   };

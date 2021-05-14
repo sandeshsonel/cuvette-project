@@ -57,3 +57,8 @@ export const updateJobFailed = (errorMsg) => ({
   type: JobActionTypes.UPDATE_JOB_DETAILS_FAILED,
   payload: errorMsg,
 });
+
+export const updateApiResponse = (response) => ({
+  type: JobActionTypes.UPDATE_API_RESPONSE,
+  payload: response,
+});

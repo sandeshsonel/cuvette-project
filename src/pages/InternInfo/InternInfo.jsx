@@ -32,7 +32,6 @@ const InternInfo = () => {
     setInternJobInfo(defaultJobState);
   };
 
-  console.log("momo", internJobInfo);
   return (
     <div>
       {value === 1 ? (

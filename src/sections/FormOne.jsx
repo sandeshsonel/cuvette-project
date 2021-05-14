@@ -5,7 +5,7 @@ import Slider from "@material-ui/core/Slider";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 
-import { setAddNewJobDetails, addNewJobSuccess } from "../app/actions/job.action";
+import { setAddNewJobDetails, addNewJobSuccess, updateApiResponse } from "../app/actions/job.action";
 import CircularLoader from "../components/CircularProgressBar/CircularLoader";
 
 const StipendSlider = withStyles({
@@ -44,7 +44,7 @@ const StipendSlider = withStyles({
 })(Slider);
 
 const FormOne = (props) => {
-  const { setValue, internJobInfo, setInternJobInfo, setAddNewJobDetails, isLoading, addNewJobSuccess, apiResponse } = props;
+  const { setValue, internJobInfo, setInternJobInfo, setAddNewJobDetails, isLoading, apiResponse, updateApiResponse } = props;
   const [check, setCheck] = useState("");
 
   const [snackbar, setSnackbar] = React.useState({
@@ -117,15 +117,15 @@ const FormOne = (props) => {
     } else {
       setAddNewJobDetails({ jobDetails: { ...internJobInfo, jobstartDate: jobStartDate } });
     }
-
-    console.log("xolo-submit", internJobInfo);
   };
 
   useEffect(() => {
     if (apiResponse === 1) {
       props.initInternJobInfo();
       setValue(1);
+      updateApiResponse(0);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiResponse]);
 
   console.log("xolo");
@@ -366,6 +366,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setAddNewJobDetails: (jobDetails) => dispatch(setAddNewJobDetails(jobDetails)),
   addNewJobSuccess: () => dispatch(addNewJobSuccess()),
+  updateApiResponse: (res) => dispatch(updateApiResponse(res)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormOne);
