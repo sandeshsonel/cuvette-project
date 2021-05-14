@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 
 import authReducer from "../reducers/authReducer";
 import userProfileReducer from "../reducers/userReducer";
+import myJobsReducer from "./jobReducer";
 
 const persistConfig = {
   key: "root",
@@ -17,6 +18,7 @@ const persistConfig = {
 const reducers = combineReducers({
   auth: authReducer,
   userProfile: userProfileReducer,
+  myJobs: myJobsReducer,
 });
 
 export default persistReducer(persistConfig, reducers);

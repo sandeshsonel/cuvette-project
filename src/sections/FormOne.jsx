@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 
-import { updateUserDetails, setUpdateUserJobDetails } from "../app/actions";
+import { setAddNewJobDetails, addNewJobSuccess } from "../app/actions/job.action";
+import CircularLoader from "../components/CircularProgressBar/CircularLoader";
 
 const StipendSlider = withStyles({
   root: {
@@ -43,7 +44,7 @@ const StipendSlider = withStyles({
 })(Slider);
 
 const FormOne = (props) => {
-  const { setValue, setUpdateUserJobDetails, internJobInfo, setInternJobInfo } = props;
+  const { setValue, internJobInfo, setInternJobInfo, setAddNewJobDetails, isLoading, addNewJobSuccess, apiResponse } = props;
   const [check, setCheck] = useState("");
 
   const [snackbar, setSnackbar] = React.useState({
@@ -114,16 +115,24 @@ const FormOne = (props) => {
         setSnackbar({ ...snackbar, open: false, message: "", warning: "info" });
       }, 2000);
     } else {
-      setUpdateUserJobDetails({ jobDetails: { ...internJobInfo, jobstartDate: jobStartDate } });
+      setAddNewJobDetails({ jobDetails: { ...internJobInfo, jobstartDate: jobStartDate } });
     }
 
     console.log("xolo-submit", internJobInfo);
   };
 
-  console.log("xolo", internJobInfo);
+  useEffect(() => {
+    if (apiResponse === 1) {
+      props.initInternJobInfo();
+      setValue(1);
+    }
+  }, [apiResponse]);
+
+  console.log("xolo");
 
   return (
     <div className="py-2 px-4 xl:py-8 xl:px-6 pt-2 pb-6">
+      {isLoading && <CircularLoader />}
       <div className="max-w-2xl m-auto xl:border xl:rounded-md xl:shadow-sm xl:py-8 xl:px-6 pt-2 pb-6">
         <form onSubmit={handleSubmit} action="">
           <div className="py-2 xl:py-4">
@@ -171,7 +180,7 @@ const FormOne = (props) => {
                 >
                   <input
                     value="part-time"
-                    checked={check === "part-time"}
+                    checked={internJobInfo.jobMode === "part-time"}
                     onChange={(e) => handleJobMode(e.target.value)}
                     className="mt-1 w-4 h-4 rounded-full cursor-pointer"
                     type="checkbox"
@@ -189,7 +198,7 @@ const FormOne = (props) => {
                 >
                   <input
                     value="semi-full-time"
-                    checked={check === "semi-full-time"}
+                    checked={internJobInfo.jobMode === "semi-full-time"}
                     onChange={(e) => handleJobMode(e.target.value)}
                     className="mt-1 w-4 h-4  cursor-pointer"
                     type="checkbox"
@@ -207,7 +216,7 @@ const FormOne = (props) => {
                 >
                   <input
                     value="full-time"
-                    checked={check === "full-time"}
+                    checked={internJobInfo.jobMode === "full-time"}
                     onChange={(e) => handleJobMode(e.target.value)}
                     className="mt-1 w-4 h-4 cursor-pointer"
                     type="checkbox"
@@ -229,10 +238,11 @@ const FormOne = (props) => {
                   aria-label="pretto slider"
                   getAriaLabel={(index) => (index === 0 ? "Minimum price" : "Maximum price")}
                   defaultValue={[20000, 40000]}
+                  value={internJobInfo.stipendRange !== null ? [internJobInfo.stipendRange[0], internJobInfo.stipendRange[1]] : [20000, 40000]}
                   onChange={(e, val) => setInternJobInfo({ ...internJobInfo, stipendRange: val })}
                   min={5000}
                   max={100000}
-                  step={100}
+                  step={2000}
                   valueLabelDisplay="on"
                 />
               </div>
@@ -348,12 +358,14 @@ const FormOne = (props) => {
 };
 
 const mapStateToProps = (state) => ({
+  isLoading: state.myJobs.isLoading,
   jobDetails: state.userProfile.jobDetails,
+  apiResponse: state.myJobs.apiResponse,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateUserDetails: (data) => dispatch(updateUserDetails(data)),
-  setUpdateUserJobDetails: (jobDetails) => dispatch(setUpdateUserJobDetails(jobDetails)),
+  setAddNewJobDetails: (jobDetails) => dispatch(setAddNewJobDetails(jobDetails)),
+  addNewJobSuccess: () => dispatch(addNewJobSuccess()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormOne);
