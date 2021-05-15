@@ -58,8 +58,15 @@ const FormTwo = (props) => {
               placeholder="Enter the location"
             />
           </div>
-          <div onClick={(e) => setCheck(!check)} className="mt-2 flex items-center space-x-2">
-            <input required className="cursor-pointer" value={check} checked={check} onChange={(e) => setCheck(!check)} type="checkbox" />
+          <div onClick={(e) => setInternJobInfo({ ...internJobInfo, jobType: !internJobInfo.jobType })} className="mt-2 flex items-center space-x-2">
+            <input
+              required
+              className="cursor-pointer"
+              value={internJobInfo.jobType}
+              checked={internJobInfo.jobType}
+              onChange={(e) => setInternJobInfo({ ...internJobInfo, jobType: !internJobInfo.jobType })}
+              type="checkbox"
+            />
             <p className="cursor-pointer text-gray-500">This job is remote</p>
           </div>
           <button

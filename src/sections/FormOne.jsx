@@ -160,8 +160,8 @@ const FormOne = (props) => {
                 Your Skills
               </label>
               <input
-                value={internJobInfo.JobSkills}
-                onChange={(e) => setInternJobInfo({ ...internJobInfo, JobSkills: e.target.value })}
+                value={internJobInfo.jobSkills}
+                onChange={(e) => setInternJobInfo({ ...internJobInfo, jobSkills: e.target.value })}
                 className="mt-1 xl:mt-2 cursor-pointer w-full outline-none rounded border py-2 px-3 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-400 focus:outline-none transition-colors duration-200"
                 type="text"
                 placeholder="Start typing and select the tab"

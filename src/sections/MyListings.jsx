@@ -128,7 +128,7 @@ const MyListings = (props) => {
                 </label>
                 <input
                   disabled
-                  value={selectJobList.jobType}
+                  value={selectJobList.jobType ? "Remote" : "Not Remote"}
                   className="mt-1 text-sm xl:text-base lg:text-base md:text-base py-2 px-3 cursor-pointer w-full border rounded-md focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-400 focus:outline-none transition-colors duration-200"
                   type="text"
                   placeholder="Job title"

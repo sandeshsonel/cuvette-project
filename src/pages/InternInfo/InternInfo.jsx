@@ -5,8 +5,9 @@ import FormTwo from "../../sections/FormTwo";
 const defaultJobState = {
   jobTitle: "",
   jobLocation: "",
-  JobSkills: "",
+  jobSkills: "",
   jobMode: "",
+  jobType: false,
   stipendRange: null,
   jobstartDate: {
     date: "",
