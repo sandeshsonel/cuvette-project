@@ -18,12 +18,13 @@ const defaultJobState = {
   jobDescription: "",
 };
 
-const InternInfo = () => {
+const InternInfo = (props) => {
+  const {apiResponse} = props
   const [value, setValue] = useState(1);
   const [internJobInfo, setInternJobInfo] = useState(defaultJobState);
 
   React.useEffect(() => {
-    if (value === 1) {
+    if (apiResponse === 1) {
       setInternJobInfo(defaultJobState);
     }
   }, [value]);
